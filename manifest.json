@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Focus.",
+  "version": "0.9.1",
+  "permissions": [
+    "background",
+    "tabs",
+    "storage",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "service_worker": "scripts/main/background.js"
+  },
+  "action": {
+    "default_popup": "html/main/popup.html",
+    "default_icon": "img/icon128.png"
+  },
+  "options_page": "html/config/tabs.html",
+  "options_ui": {
+    "page": "html/config/tabs.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/main/content.js"]
+    }
+  ],
+  "icons": {
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png"
+  },
+  "host_permissions": ["<all_urls>"],
+  "web_accessible_resources": [
+    {
+      "resources": ["styles/blockPage.css"],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["html/config/blockPage.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

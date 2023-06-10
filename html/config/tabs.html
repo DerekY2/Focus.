@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus</title>
+  <link rel="stylesheet" href="../../styles/config.css">
+  <style>
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .input-container {
+      margin-bottom: 10px;
+    }
+
+    .input-container label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .input-container input, .input-container select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .addButton, .closeTabsButton, .submit-button {
+      font-family: cursive;
+      padding: 10px 20px;
+      background-color: lightblue;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .saved-website {
+      font-family: cursive;
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      background-color: lightblue;
+      color: #008cff;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    .saved-website button.delete-button {
+      font-family: cursive;
+      margin-left: auto;
+      background-color: #008cff;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 10px;
+      margin-right: 10px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="logo">Focus.</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="tabs.html">Tabs</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="break time.html">Break Time</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Tab Management</h1>
+      <div class="button-container">
+        <button id="addTabButton" class="addButton">Add Tab</button>
+        <button id="closeTabsButton" class="closeTabsButton">Block Tabs</button>
+      </div>
+      <form id="tabForm" style="display: none;">
+        <div class="input-container">
+          <label for="websiteUrl">Website URL:</label>
+          <input type="text" id="websiteUrl" required>
+          <p class="error-message" id="urlErrorMessage"></p> <!-- Error message element -->
+        </div>
+        <div class="input-container">
+          <label for="websiteName">Website Name:</label>
+          <input type="text" id="websiteName" required>
+        </div>
+        <button type="button" id="saveButton" class="submit-button">Save</button>
+      </form>
+    </section>
+
+    <section>
+      <h1>Blocked Tabs</h1>
+      <div id="savedTabsContainer"></div>
+    </section>
+  </main>
+
+  <script src="../../scripts/config/tabs.js"></script>
+</body>
+</html>

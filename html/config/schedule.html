@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus</title>
+  <link rel="stylesheet" href="../../styles/config.css">
+  <style>
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center; /* Center align the section content */
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Center align the form items */
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center; /* Center align the content */
+      margin-bottom: 10px; /* Add margin bottom to create space */
+      height: 40px; /* Set a fixed height for the input container */
+    }
+
+    .input-container label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      text-align: center; /* Center align the label text */
+    }
+
+    .input-container input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+      text-align: center; /* Center align the input text */
+    }
+
+    .submit-button {
+      padding: 10px 30px;
+      background-color: lightblue; /* Set the background color to lightblue */
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: auto; /* Move the button to the right */
+    }
+
+    .tasks-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tasks-table th,
+    .tasks-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .tasks-table th {
+      background-color: #f1f1f1;
+    }
+
+    .tasks-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .delete-button {
+      font-family: cursive;
+      background-color: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .sort-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .sort-container button {
+      background-color: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .clear-container {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .clear-container button {
+      background-color: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  
+    .error-message {
+      font-size: 12px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="logo">Focus.</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="tabs.html">Tabs</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="break time.html">Break Time</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h1>Schedule</h1>
+      <form id="tasks-form">
+        <div class="input-container">
+          <label for="taskName">Enter task name:</label>
+          <input type="text" id="taskName" name="taskName" placeholder="Enter task name">
+          <p id="error-message" class="error-message"></p>
+        </div>
+        <div class="input-container">
+          <label for="time">Choose a time:</label>
+          <div class="time-dropdown">
+            <select id="time" name="time">
+              <option value="06:00">06:00</option>
+              <option value="06:30">06:30</option>
+              <option value="07:00">07:00</option>
+              <option value="07:30">07:30</option>
+              <option value="08:00">08:00</option>
+              <option value="08:30">08:30</option>
+              <option value="09:00">09:00</option>
+              <option value="09:30">09:30</option>
+              <option value="10:00">10:00</option>
+              <option value="10:30">10:30</option>
+              <option value="11:00">11:00</option>
+              <option value="11:30">11:30</option>
+              <option value="12:00">12:00</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="14:30">14:30</option>
+              <option value="15:00">15:00</option>
+              <option value="15:30">15:30</option>
+              <option value="16:00">16:00</option>
+              <option value="16:30">16:30</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+              <option value="22:00">22:00</option>
+              <option value="22:30">22:30</option>
+              <option value="23:00">23:00</option>
+              <option value="23:30">23:30</option>
+              <option value="00:00">12:00</option>
+              <option value="00:30">12:30</option>
+              <option value="01:00">01:00</option>
+              <option value="01:30">01:30</option>
+              <option value="02:00">02:00</option>
+              <option value="02:30">02:30</option>
+              <option value="03:00">03:00</option>
+              <option value="03:30">03:30</option>
+              <option value="04:00">04:00</option>
+              <option value="04:30">04:30</option>
+              <option value="05:00">05:00</option>
+              <option value="05:30">05:30</option>
+            </select>
+          </div>
+        </div>
+        
+        <button id="submit-button" class="submit-button" type="submit">Submit</button>
+      </form>
+    </section>
+    <section>
+      <div class="clear-container">
+        <button id="clearButton">clear</button>
+      </div>
+      <div class="sort-container">
+        <button id="sortButton">sort by time</button>
+      </div>
+      <h1>Your Schedule</h1>
+      <table class="tasks-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tasks-body">
+          <!-- The tasks will be dynamically populated here -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="../../scripts/config/schedule.js"></script>
+</body>
+</html>

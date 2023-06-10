@@ -1,0 +1,23 @@
+/* style.css*/
+body{
+    background-color:#9b00ff;
+    text-align: center;
+    width: 400px;
+    height: 700px;
+    position:relative;
+}
+h1{
+    color:#dfe22c;
+    font-size: x-large;
+    font-style: normal;
+    text-align:center;
+}
+
+#Quandale{
+  font-size: xx-large;
+  font-family:fantasy;
+  color:white;
+}
+
+#return{
+}
