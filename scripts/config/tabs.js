@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
+  // save tabs
   function saveTab(websiteUrl, websiteName) {
     console.log("Saving tab:", websiteUrl, websiteName);
     return new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
+  // get tabs 
   function getTabs() {
     console.log("Getting tabs");
     chrome.storage.sync.get("urlEntries", function(result) {

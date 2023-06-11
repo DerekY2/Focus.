@@ -14,18 +14,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-
+  // open configuration page
   if (configBtn) {
     configBtn.addEventListener("click", function() {
       chrome.runtime.sendMessage({ action: "openOptionsPage" });
     });
   }
 
-  // Attach the event listener to the sort button
-  var sortButton = document.getElementById('sortButton');
-  if (sortButton) {
-    sortButton.addEventListener('click', handleSort);
-  }
-
   console.log('popup loaded');
+
+
 });

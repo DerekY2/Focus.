@@ -1,28 +1,3 @@
-function updateTab(){
-chrome.storage.local.get(["tabID"], function(result) {
-    const tabID = result.tabID;
-    if (tabID) {
-      // Load CSS file
-      chrome.scripting.insertCSS({
-        target: { tabId: tabID },
-        files: ["styles/style.css"]
-      }, function() {
-        // Load HTML file
-        chrome.scripting.executeScript({
-          target: { tabId: tabID },
-          function: generateHTML,
-          args: ["YOUTUBE"]
-        }, function() {
-          console.log("Tab content injected");
-        });
-      });
-    } else {
-      console.error("Tab ID not found");
-    }
-  });
-}
-
-
 chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
   if (request.action === "updateTab") {
     chrome.storage.local.get(["tabID"], function(result) {
@@ -49,6 +24,31 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender, sendRespo
   }
 });
 
+
+function updateTab(){
+  chrome.storage.local.get(["tabID"], function(result) {
+      const tabID = result.tabID;
+      if (tabID) {
+        // Load CSS file
+        chrome.scripting.insertCSS({
+          target: { tabId: tabID },
+          files: ["styles/style.css"]
+        }, function() {
+          // Load HTML file
+          chrome.scripting.executeScript({
+            target: { tabId: tabID },
+            function: generateHTML,
+            args: ["YOUTUBE"]
+          }, function() {
+            console.log("Tab content injected");
+          });
+        });
+      } else {
+        console.error("Tab ID not found");
+      }
+    });
+  }
+  
 const generateHTML = (pageName) => {
   return `
    
