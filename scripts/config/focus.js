@@ -183,10 +183,21 @@ var quotes = [{
 // Select a random quote
 var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-// Create the HTML for the quote and author
-var quoteHTML = '<div class="quote">"' + randomQuote.quote + '"</div>';
-var authorHTML = '<div class="author">- ' + randomQuote.author + '</div>';
+// Function to generate a new random quote on click
+function generateRandomQuote() {
+  randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  updateQuote();
+}
 
-// Insert the quote and author into the page
-document.getElementById('quote-container').innerHTML = quoteHTML + authorHTML;
+// Function to update the quote and author in the HTML
+function updateQuote() {
+  var quoteHTML = '<div class="quote">"' + randomQuote.quote + '"</div>';
+  var authorHTML = '<div class="author">- ' + randomQuote.author + '</div>';
+  document.getElementById('quote-container').innerHTML = quoteHTML + authorHTML;
+}
 
+// Initial quote generation
+updateQuote();
+
+// Add click event listener to the document body
+document.body.addEventListener('click', generateRandomQuote);
