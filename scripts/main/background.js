@@ -17,10 +17,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 });
 
 function closeTabs() {
-  // Retrieve the urlEntries array from storage
-  chrome.storage.sync.get("urlEntries", function(result) {
+  // Retrieve the urlEntries and openEntries arrays from storage
+  chrome.storage.sync.get(["urlEntries", "openEntries"], function(result) {
     var urlEntries = result.urlEntries || [];
-    console.log("background.js: closeTabs: Retrieved from storage:", urlEntries);
+    var openEntries = result.openEntries || [];
+    console.log("background.js: closeTabs: Retrieved from storage:", urlEntries, openEntries);
 
     // Query all tabs
     chrome.tabs.query({}, function(tabs) {
@@ -56,9 +57,28 @@ function closeTabs() {
           });
         }
       });
+
+      // Open the URLs in the openEntries array
+      openEntries.forEach(function(entry) {
+        // Check if the tab with the URL is already open
+        var foundTab = tabs.find(tab => tab.url === entry.websiteUrl);
+        if (foundTab) {
+          // Activate the existing tab
+          chrome.tabs.update(foundTab.id, { active: true }, function(updatedTab) {
+            console.log("Existing tab activated:", foundTab.id);
+          });
+        } else {
+          // Create a new tab with the URL
+          chrome.tabs.create({ url: entry.websiteUrl }, function(newTab) {
+            console.log("New tab opened:", newTab.id);
+          });
+        }
+      });
     });
   });
 }
+
+
 
 function toggleCloseTabs() {
   // Toggle the state of closeTabsEnabled
