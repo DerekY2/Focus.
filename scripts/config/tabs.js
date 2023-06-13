@@ -4,17 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const websiteUrlInput = document.getElementById('websiteUrl');
   const websiteNameInput = document.getElementById('websiteName');
   const saveButton = document.getElementById('saveButton');
+  const openButton = document.getElementById('openButton');
   const closeTabsButton = document.getElementById('closeTabsButton');
   const savedTabsContainer = document.getElementById('savedTabsContainer');
+  const openTabsContainer = document.getElementById('openTabsContainer');
 
   let isEditing = false;
   let urlEntries = [];
+  let openEntries = []; // Corrected variable name
 
   // Retrieve tabs on page load
   getTabs();
-
-
-
 
   addTabButton.addEventListener('click', () => {
     if (!isEditing) {
@@ -24,9 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
       websiteNameInput.value = '';
     }
   });
-
-
-
 
   // save tabs
   function saveTab(websiteUrl, websiteName) {
@@ -40,24 +37,46 @@ document.addEventListener('DOMContentLoaded', () => {
         // Resolve the promise to indicate successful saving
         resolve();
         console.log('New entry saved:', websiteName, '-', websiteUrl);
-        //alert('New entry saved! websiteName: ' + websiteName + ', websiteUrl: ' + websiteUrl); // removing alert bc its annoying
       });
       getTabs();
     });
   }
 
+  function saveTabOpen(websiteUrl, websiteName) {
+    console.log("Saving tab open:", websiteUrl, websiteName);
+    return new Promise((resolve, reject) => {
+      // Push the new entry into the array
+      openEntries.push({ websiteUrl, websiteName }); // Corrected variable name
 
+      // Save the updated array to Chrome storage
+      chrome.storage.sync.set({ openEntries }, function() {
+        // Resolve the promise to indicate successful saving
+        resolve();
+        console.log('New entry saved (Open):', websiteName, '-', websiteUrl);
+      });
+      displayOpenTabs();
+    });
+  }
 
-
-  // get tabs 
+  // get tabs
   function getTabs() {
     console.log("Getting tabs");
     chrome.storage.sync.get("urlEntries", function(result) {
-      var consoleUrlEntries = Array.from(result.urlEntries);
-      console.log("Retrieved from storage:", consoleUrlEntries);
+      console.log("Retrieved from storage:", result.urlEntries);
       if (result.urlEntries) {
-        urlEntries = result.urlEntries; // Assign the retrieved entries to urlEntries
+        urlEntries = result.urlEntries;
         displayTabs();
+      }
+      else {
+        // Handle the case when no entries are found
+      }
+    });
+
+    chrome.storage.sync.get("openEntries", function(result){
+      console.log("Retrieved from storage:", result.openEntries);
+      if (result.openEntries) {
+        openEntries = result.openEntries; // Corrected variable name
+        displayOpenTabs();
       }
       else {
         // Handle the case when no entries are found
@@ -82,6 +101,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function displayOpenTabs() {
+    openTabsContainer.innerHTML = '';
+
+    openEntries.forEach((entry) => { // Corrected variable name
+      const openTab = document.createElement('div');
+      openTab.classList.add('saved-website');
+      openTab.innerText = entry.websiteName;
+
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('delete-button');
+      deleteButton.innerText = 'Delete';
+
+      openTab.appendChild(deleteButton);
+      openTabsContainer.appendChild(openTab);
+    });
+  }
 
   savedTabsContainer.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-button')) {
@@ -90,50 +125,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  openTabsContainer.addEventListener('click', (event) => { // Added event listener for open tabs container
+    if (event.target.classList.contains('delete-button')) {
+      const openTab = event.target.closest('.saved-website');
+      deleteOpenTab(openTab);
+    }
+  });
 
-  function deleteTab(savedTab) { //savedTab retrieved from whatever calls the function
+  function deleteTab(savedTab) {
     const deleteName = savedTab.childNodes[0].nodeValue.trim();
     console.log("Deleting tab:", deleteName);
-    console.log("Deleting tab:", deleteName);
-    // Find the index of the entry with the specified websiteName
     const deleteIndex = urlEntries.findIndex((entry) => {
-      console.log("Searching Entry:", entry); // lots of logs for testing...
-      console.log("entry.websiteUrl:", entry.websiteName);
-      console.log("deleteName:", deleteName);
       return entry.websiteName.toString() === deleteName.toString();
     });
-    var consoleUrlEntries = Array.from(urlEntries);
-    console.log(consoleUrlEntries);
-    console.log('deleteIndex: ' + deleteIndex); // return index
     if (deleteIndex !== -1) {
-      // Remove the entry from the urlEntries array at the found index
       urlEntries.splice(deleteIndex, 1);
-      console.log('urlEntries: ', consoleUrlEntries);
-      // Save the updated array to Chrome storage
       chrome.storage.sync.set({ urlEntries }, function() {
         console.log("Entry deleted:", deleteName);
         getTabs();
       });
     }
   }
-  
 
+  function deleteOpenTab(openTab) {
+    const deleteName = openTab.childNodes[0].nodeValue.trim();    
+    console.log("Deleting tab:", deleteName);
+    const deleteIndex = openEntries.findIndex((entry) => {
+      return entry.websiteName.toString() === deleteName.toString();
+    });
+    if (deleteIndex !== -1) {
+      openEntries.splice(deleteIndex, 1);
+      chrome.storage.sync.set({ openEntries }, function() {
+        console.log("Entry deleted:", deleteName);
+        getTabs();
+      });
+    }
+  }
 
   function isValidUrl(url) {
     // Basic URL validation using regular expression
     const urlRegex = /^[^ "]+\..+$/;
     return urlRegex.test(url);
   }
-  
-
 
   saveButton.addEventListener('click', () => {
-    var websiteUrl = websiteUrlInput.value;
-    var websiteName = websiteNameInput.value;
+    const websiteUrl = websiteUrlInput.value;
+    const websiteName = websiteNameInput.value;
 
     if (websiteUrl.trim() === '' || websiteName.trim() === '') {
       return;
-    };
+    }
     
     if (!isValidUrl(websiteUrl)) {
       urlErrorMessage.textContent = 'Please enter a valid URL.'; // Display error message
@@ -158,21 +199,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     saveTab(websiteUrl, websiteName)
       .then(() => {
-        alert('Tab saved successfully!');
+        alert('Tab saved successfully! - Block');
       })
       .catch((error) => {
-        console.error('Error saving tab:', error);
+        console.error('Error saving tab(block):', error);
       });
       
   });
 
+  openButton.addEventListener('click', () => {
+    const websiteUrl = websiteUrlInput.value;
+    const websiteName = websiteNameInput.value;
 
+    if (websiteUrl.trim() === '' || websiteName.trim() === '') {
+      return;
+    }
+  
+    if (!isValidUrl(websiteUrl)) {
+      urlErrorMessage.textContent = 'Please enter a valid URL.'; // Display error message
+      return;
+    }
 
+    const openTab = document.createElement('div');
+    openTab.classList.add('saved-website');
+    openTab.innerText = websiteName;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.innerText = 'Delete';
+
+    openTab.appendChild(deleteButton);
+    openTabsContainer.appendChild(openTab);
+
+    websiteUrlInput.value = '';
+    websiteNameInput.value = '';
+    tabForm.style.display = 'none';
+    isEditing = false;
+
+    saveTabOpen(websiteUrl, websiteName)
+      .then(() => {
+        alert('Tab saved successfully! - Open');
+      })
+      .catch((error) => {
+        console.error('Error saving tab(Open):', error);
+      });
+  });
 
   closeTabsButton.addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-      var activeTabUrl = tabs[0].url;
+      const activeTabUrl = tabs[0].url;
       console.log('active tab: ' + activeTabUrl);
     });
   });
 });
+

@@ -55,6 +55,26 @@
       cursor: pointer;
     }
 
+    .saveBlockBtn{
+      font-family: cursive;
+      padding: 10px 20px;
+      background-color: rgb(255, 137, 137);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .saveOpenBtn{
+      font-family: cursive;
+      padding: 10px 20px;
+      background-color: rgb(153, 255, 113);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
     .saved-website {
       font-family: cursive;
       display: flex;
@@ -108,7 +128,6 @@
       <h1>Tab Management</h1>
       <div class="button-container">
         <button id="addTabButton" class="addButton">Add Tab</button>
-        <button id="closeTabsButton" class="closeTabsButton">Block Tabs</button>
       </div>
       <form id="tabForm" style="display: none;">
         <div class="input-container">
@@ -120,14 +139,20 @@
           <label for="websiteName">Website Name:</label>
           <input type="text" id="websiteName" required>
         </div>
-        <button type="button" id="saveButton" class="submit-button">Save</button>
+        <button type="button" id="saveButton" class="saveBlockBtn">Save - Block</button>
+        <button type="button" id="openButton" class="saveOpenBtn">Save - Open</button>
       </form>
     </section>
 
     <section>
-      <h1>Blocked Tabs</h1>
+      <h1>Tabs to block</h1>
       <div id="savedTabsContainer"></div>
     </section>
+
+    <section>
+      <h1>Tabs to open</h1>
+      <div id="openTabsContainer"></div>
+    </section>    
   </main>
 
   <script src="../../scripts/config/tabs.js"></script>

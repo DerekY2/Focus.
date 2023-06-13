@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
   function handleSubmit(event) {
     event.preventDefault();
   
@@ -76,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to handle sort button click
   function handleSort() {
-    console.log("Sorting tasks...");
     // Get the tasks rows
     var tasksRows = tasksBody.querySelectorAll("tr");
 
@@ -104,9 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tasksArray.forEach(function (row) {
       tasksBody.appendChild(row);
     });
+
     // Save the updated tasks order to Chrome storage
     saveTasks();
-    console.log('Tasks sorted!');
   }
 
 

@@ -56,7 +56,7 @@
 
     .timer-container {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       margin-bottom: 10px;
     }
 
@@ -75,7 +75,6 @@
       font-size: 24px;
       margin: 10px 0;
     }
-
   </style>
 </head>
 <body>
@@ -94,6 +93,22 @@
 
   <main>
     <section>
+      <h2>Schedule Break</h2>
+      <div>
+        <label for="scheduleDuration">Schedule break in:</label>
+        <select id="scheduleDuration" name="scheduleDuration">
+          <option value="1">1 hour</option>
+          <option value="2">2 hours</option>
+          <option value="3">3 hours</option>
+          <option value="4">4 hours</option>
+          <option value="5">5 hours</option>
+          <option value="0.0167">1 minute</option> 
+        </select>
+      </div>
+      <button id="scheduleBreak">Schedule Break</button>
+    </section>
+
+    <section>
       <h2>Break Timer</h2>
       <div>
         <label for="duration">Choose break duration:</label>
@@ -109,33 +124,11 @@
       </div>
       <button id="startTimer">Start Break</button>
     </section>
-    
-    <section>
-      <h2>Schedule Break</h2>
-      <div>
-        <label for="scheduleDuration">Schedule break in:</label>
-        <select id="scheduleDuration" name="scheduleDuration">
-          <option value="1">1 hour</option>
-          <option value="2">2 hours</option>
-          <option value="3">3 hours</option>
-          <option value="4">4 hours</option>
-          <option value="5">5 hours</option>
-          <!-- Add more schedule duration options as needed -->
-        </select>
-      </div>
-      <button id="scheduleBreak">Schedule Break</button>
-    </section>
-
     <div class="timer-container">
       <div class="timer">
-        <h2>Break in:</h2>
-        <p id="left-timer">00:00</p>
+        <h2 id="timerTitle">Break in:</h2>
+        <p id="timer">00:00</p>
       </div>
-      <div class="timer">
-        <h2>Break duration:</h2>
-        <p id="right-timer">00:00</p>
-      </div>
-    </div>
   </main>
   <script src="../../scripts/config/break.js"></script>
 </body>

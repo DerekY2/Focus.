@@ -1,20 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Focus.",
-  "version": "0.9.1",
+  "version": "0.9.8",
   "permissions": [
-    "background",
     "tabs",
     "storage",
     "notifications",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "file:///*"
   ],
   "background": {
     "service_worker": "scripts/main/background.js"
   },
   "action": {
     "default_popup": "html/main/popup.html",
-    "default_icon": "img/icon128.png"
+    "default_icon": "img/icon16.png"
   },
   "options_page": "html/config/tabs.html",
   "options_ui": {
@@ -28,6 +28,7 @@
     }
   ],
   "icons": {
+    "16": "img/icon16.png",
     "32": "img/icon32.png",
     "48": "img/icon48.png",
     "64": "img/icon64.png",
