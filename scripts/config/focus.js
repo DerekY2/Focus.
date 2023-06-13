@@ -44,7 +44,7 @@ var quotes = [{
   quote: "If you don't value your time, neither will others. Stop giving away your time and talents- start charging for it.",
   author: "Kim Garst"
 }, {
-  quote: "You miss 100% of the shots you don’t take.",
+  quote: "You miss 100% of the shots you don't take.",
   author: "Wayne Gretzky"
 }, {
   quote: "The most difficult thing is the decision to act, the rest is merely tenacity.",
@@ -146,7 +146,7 @@ var quotes = [{
   quote: "Though no one can go back and make a brand-new start, anyone can start from now and make a brand-new ending.",
   author: "Carl Bard"
 }, {
-  quote: "Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails. Explore. Dream. Discover.",
+  quote: "Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do.",
   author: "Mark Twain"
 }, {
   quote: "The first step toward success is taken when you refuse to be a captive of the environment in which you first find yourself.",
