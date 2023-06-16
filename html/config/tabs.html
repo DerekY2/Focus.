@@ -53,26 +53,29 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      transition: background-color 0.3s, color 0.3s; /* Add smooth transition effect */
     }
 
     .saveBlockBtn{
       font-family: cursive;
       padding: 10px 20px;
-      background-color: rgb(255, 65, 65);
-      color: #fff;
+      background-color: rgb(255, 133, 133);
+      color: #000000;
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      transition: background-color 0.3s, color 0.3s; /* Add smooth transition effect */
     }
 
     .saveOpenBtn{
       font-family: cursive;
       padding: 10px 20px;
-      background-color: rgb(105, 232, 55);
-      color: #fff;
+      background-color: rgb(101, 255, 40);
+      color: #000000;
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      transition: background-color 0.3s, color 0.3s; /* Add smooth transition effect */
     }
 
     .saved-website {
@@ -83,9 +86,10 @@
       margin-right: 10px;
       margin-bottom: 10px;
       background-color: lightblue;
-      color: #008cff;
+      color: #000000;
       border-radius: 3px;
       font-size: 14px;
+      transition: background-color 0.3s, color 0.3s; /* Add smooth transition effect */
     }
 
     .saved-website button.delete-button {
@@ -96,15 +100,48 @@
       border-radius: 3px;
       padding: 5px 10px;
       margin-right: 10px;
-      color: #fff;
+      color: #000000;
       cursor: pointer;
+      transform: scale(1.5);
+      transition: background-color 0.3s, color 0.3s; /* Add smooth transition effect */
     }
 
-    .error-message {
-      color: red;
-      font-size: 14px;
-      margin-top: 5px;
+    .saved-website button.delete-button:hover {
+      background-color: #0077ff; /* Change to a darker shade */
     }
+
+    .saved-website:hover,
+    .addButton:hover,
+    .closeTabsButton:hover,
+    .submit-button:hover,
+    .saveBlockBtn:hover,
+    .saveOpenBtn:hover {
+      filter: brightness(0.9); /* Darken the color on hover */
+      transform: scale(1.03); /* Apply a slight scale increase */
+      transition: background-color 0.3s, transform 0.3s; /* Add smooth transition effect */
+    }
+
+
+    .addButton:active,
+    .closeTabsButton:active,
+    .submit-button:active,
+    .saveBlockBtn:active,
+    .saveOpenBtn:active {
+      filter: brightness(0.8); /* Darken the color on click */
+    }
+
+    .saved-website.blocked {
+      background-color: rgb(255, 144, 144);
+    }
+
+    .saved-website.open {
+      background-color: rgb(179, 255, 179);
+    }
+
+    .delete-button {
+      background-color: transparent;
+    }
+    
   </style>
 </head>
 <body>
@@ -149,8 +186,6 @@
       <div id="openTabsContainer"></div>
     </section>    
   </main>
-
-  
 
   <script src="../../scripts/config/tabs.js"></script>
 </body>

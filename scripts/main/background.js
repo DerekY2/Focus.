@@ -38,18 +38,16 @@ function closeTabs() {
         }
       }
 
+      /*
       // If focus.html tab is found, activate it
       if (blockPageTabId) {
         chrome.tabs.update(blockPageTabId, { active: true }, function (updatedTab) {
           console.log("Block page tab already exists:", blockPageTabId);
         });
       } else {
-        // Create a new tab for focus.html
-        chrome.tabs.create({ url: chrome.runtime.getURL("../../html/config/focus.html") }, function (newTab) {
-          blockPageTabId = newTab.id;
-          console.log("Block page opened:", blockPageTabId);
-        });
+        
       }
+      */
 
       // Prepare an array of promises to close the matching tabs
       var closePromises = [];
@@ -62,6 +60,11 @@ function closeTabs() {
           var closePromise = new Promise(function (resolve, reject) {
             chrome.tabs.remove(tab.id, function () {
               console.log("Tab closed:", tab.id);
+              // Create a new tab for focus.html
+              chrome.tabs.create({ url: chrome.runtime.getURL("../../html/config/focus.html") }, function (newTab) {
+                blockPageTabId = newTab.id;
+                console.log("Block page opened:", blockPageTabId);
+              });
               resolve(); // Resolve the promise when the tab is closed
             });
           });
@@ -102,17 +105,22 @@ function toggleCloseTabs() {
 
     console.log("closeTabs enabled");
   } else {
-    // Close focus.html tab if it is open
-    if (blockPageTabId) {
-      chrome.tabs.remove(blockPageTabId, function () {
-        console.log("Block page closed:", blockPageTabId);
-        blockPageTabId = null;
+    // Close all focus.html tabs if they are open
+    chrome.tabs.query({}, function(tabs) {
+      tabs.forEach(function(tab) {
+        if (tab.url.includes("focus.html")) {
+          chrome.tabs.remove(tab.id, function() {
+            console.log("Block page closed:", tab.id);
+          });
+        }
       });
-    }
+    });
 
     console.log("closeTabs disabled");
   }
 }
+
+
 
 function handleUpdatedTab(tabId, changeInfo, tab) {
   if (changeInfo.url) {
