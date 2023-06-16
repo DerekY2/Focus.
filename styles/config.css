@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -6,13 +5,15 @@
 }
 
 /* Apply a modern color scheme */
+
 body {
   font-family: cursive;
   margin: 0;
   padding: 0;
-  background-color: lightblue; /* Set the background color to purple */
   color: black;
+  background: #313131 url('../../img/background2.jpg') no-repeat center / cover fixed; /* Update background property */
 }
+
 
 /* Style the header and navigation */
 header {
@@ -33,6 +34,7 @@ nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  font-size: 20px;
 }
 
 nav ul li {
@@ -51,7 +53,7 @@ main {
 }
 
 section {
-  background-color: #fff;
+  background-color: rgb(0, 0, 0);
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -80,4 +82,50 @@ p {
   left: 0;
 }
 
+/* Preload the background image */
+#preload-bg {
+  display: none;
+  background: url('../../img/background2.jpg') no-repeat center / cover;
+}
+
+/* Style the toggle switch */
+.toggle-switch {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-switch label {
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-switch label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label {
+  background-color: #6ab04c;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label:after {
+  transform: translateX(20px);
+}
 

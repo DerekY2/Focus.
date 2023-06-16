@@ -22,7 +22,7 @@ app.get('/read/:collection_name/:item_id', (req, res) =>{
       let response = item.data();
       return res.status(200).send(response);
     }catch(error){
-      console.log(error);
+      //console.log(error);
       return res.status(500).send(error);
     }
   })();
@@ -46,7 +46,7 @@ app.get('/read/:collection_name', (req, res) => {
       });
       return res.status(200).send(response);
     } catch(error){
-      console.log(error);
+      //console.log(error);
       return res.status(500).send(error);
     }
   })();

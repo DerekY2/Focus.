@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get the entered task name
     var taskNameInput = document.getElementById('taskName');
     var taskName = taskNameInput.value.trim(); // Trim leading/trailing spaces
-    console.log('New entry taskName: ' + taskName);
+    //console.log('New entry taskName: ' + taskName);
   
     // Check if the task name is empty
     if (taskName === '') {
@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create task cell
     var taskCell = document.createElement('td');
     taskCell.textContent = taskName;
-    console.log('taskCell.textContent: ' + taskCell.textContent);
+    //console.log('taskCell.textContent: ' + taskCell.textContent);
   
     // Create time cell
     var timeCell = document.createElement('td');
     timeCell.textContent = selectedTime;
-    console.log('timeCell.textContent: ' + timeCell.textContent);
+    //console.log('timeCell.textContent: ' + timeCell.textContent);
   
     // Create action cell
     var actionCell = document.createElement('td');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // Save the updated tasks to Chrome storage
     saveTasks();
-    console.log('called saveTasks');
+    //console.log('called saveTasks');
   
     // Clear the form input fields
     taskNameInput.value = '';
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       chrome.storage.sync.set({ tasks: tasks }, function() {
         // Resolve the promise to indicate successful saving
         resolve();
-        console.log("Task saved: ", tasks);
+        //console.log("Task saved: ", tasks);
       });
     });
   }
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.get("tasks", function(result) {
       delete result.tasks; // Remove the tasks array from the data object
       chrome.storage.sync.set(result, function() {
-        console.log("Tasks array cleared from Chrome storage. ");
+        //console.log("Tasks array cleared from Chrome storage. ");
       });
     });
     loadTasks();
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 */
 
   function loadTasks() {
-    console.log("Loading tasks...");
+    //console.log("Loading tasks...");
     return new Promise((resolve, reject) => {
       chrome.storage.sync.get("tasks", function(result) {
         var tasks = result.tasks;
@@ -202,13 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
             newRow.appendChild(actionCell);
   
             tasksBody.appendChild(newRow);
-            console.log('Tasks: Loaded tasks:', consoleTasks);
+            //console.log('Tasks: Loaded tasks:', consoleTasks);
           });
   
-          console.log("Tasks loaded:", tasks);
+          //console.log("Tasks loaded:", tasks);
           resolve(tasks); // Resolve the promise with the loaded tasks
         } else {
-          console.log("No tasks found.");
+          //console.log("No tasks found.");
           resolve([]); // Resolve the promise with an empty array if no tasks are found
         }
       });
