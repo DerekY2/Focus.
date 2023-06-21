@@ -1,5 +1,6 @@
 # Focus.
-Boost productivity
+ICS4U: 
+Boost productivity - 
 by Derek Yu and Hrishi Paripati
 
 Are you tired of getting sucked into the endless vortex of online distractions? Say goodbye to wasted hours and hello to a more focused and productive digital life with Focus—a Chrome extension designed to empower you.
