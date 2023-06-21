@@ -1,3 +1,7 @@
+<!--Authors: Derek Y, Hrishi P
+    "Focus"
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +18,13 @@
       align-items: center;
     }
 
-    section {
+    #mainSection {
       background-color: white;
       padding: 40px;
       margin-bottom: 40px;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      text-align: center; /* Align paragraphs to the left */
     }
 
     h1 {
@@ -33,6 +37,9 @@
       font-size: 18px;
       line-height: 1.5;
       color: #555;
+      word-wrap: break-word;
+      max-width: 55vw; /* Set the maximum width to 70% of the viewport width */
+      margin-bottom: 20px; /* Add extra space between paragraphs */
     }
 
     /* Style the footer */
@@ -46,6 +53,63 @@
       bottom: 0;
       left: 0;
     }
+
+    /* Hide the intro section by default */
+    #intro {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.95); /* Set the background color to semi-transparent white */
+      color: white; /* Set the text color to white */
+      padding: 40px;
+      margin-bottom: 40px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: left; /* Align paragraphs to the left */
+    }
+
+
+    /* Style the "Need help?" button */
+    #introBtn, #tabManagementBtn {
+      font-family: inherit;
+      font-size: 14px; /* Adjust the font size as desired */
+      color: #156;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      margin-top: auto; /* Push the button to the bottom */
+      outline: none;
+    }
+
+    #introBtn:hover, #tabManagementBtn:hover {
+      color: #333;
+    }
+
+    section > p{
+      text-indent: 25px;
+    }
+
+    section > h1{
+      text-indent: 25px;
+    }
+
+    #tabsButton {
+      font-family: inherit;
+      font-size: 14px;
+      color: #156;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      outline: none;
+      text-indent: 25px; /* Add indentation */
+    }
+
+    #tabsButton:hover {
+      color: #333;
+    }
+
   </style>
 </head>
 <body>
@@ -56,16 +120,37 @@
         <li><a href="home.html">Home</a></li>
         <li><a href="tabs.html">Tabs</a></li>
         <li><a href="schedule.html">Schedule</a></li>
-       
       </ul>
     </nav>
   </header>
 
   <main>
-    <section>
-      <h1>Welcome to Focus</h1>
-      <p>Ready to stop procrastinating?</p>
+    <section id="mainSection">
+      <h1>Welcome to Focus.</h1>
+      <p>Boost productivity.</p>
+      <p></p>
+      <button id="introBtn">What is Focus?</button>
     </section>
+
+    <section id="intro">
+      <h1>Hey.</h1>
+
+      <p>Are you tired of getting sucked into the endless vortex of online distractions? Say goodbye to wasted hours and hello to a more focused and productive digital life with Focus&mdash;a Chrome extension designed to empower you.</p>
+
+      <p>Focus is the result of our team's dedication to help people like you regain control over their online habits. We understand the struggle because we've been there too. That's why we poured our hearts into creating a tool that puts you back in the driver's seat.</p>
+
+      <p>With Focus, you can bid farewell to mindless scrolling and say hello to increased productivity and personal growth. Harness the power of a website blocking & opening feature, blocking distracting tabs from your browser while opening productivity tabs that align with your goals and tasks - with just a single click of a button. It's like having a virtual assistant that sets you up for success right from the start.</p>
+
+      <p>Focus isn't just about being productive; it's about creating a digital world that aligns with your goals and aspirations. We genuinely want to help you succeed in making the most of your online time.</p>
+
+      <p>The time has come. Take control of your online experience. Break free from distractions, focus on what truly matters, and unlock your full potential. Your digital journey starts here.</p>
+
+      <p>Wishing you endless focus and productivity, </p>
+
+      <p>The Focus Team.</p>
+      <button id="tabsButton" >Get Started</button>
+    </section>
+
   </main>
 
   <footer class="site-footer">

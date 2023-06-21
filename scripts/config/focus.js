@@ -1,4 +1,23 @@
-var quotes = [{
+/*Authors: Derek Yu, Hrishi Paripati
+  focus.html - backend; generates random quotes to display on page.
+  var randomQuote: 
+  This variable selects a random quote from the quotes array. It generates a random index using Math.random() and multiplies it by the length of the quotes array. The Math.floor() function is used to round down the result to the nearest whole number.
+
+  generateRandomQuote(): 
+    This function generates a new random quote. It is called when a click event occurs.
+    Re-randomizes var randomQuote
+
+  updateQuote(): 
+    This function updates the quote and author displayed in the HTML. It creates HTML strings for the 
+    quote and author using the randomQuote object and inserts them into the quote-container element.
+
+  document.body.addEventListener(): 
+    This line adds a click event listener to the document.body element. When the page is clicked, it triggers 
+    the generateRandomQuote() function, which generates a new random quote and updates the HTML on the page accordingly.
+
+*/
+
+var quotes = [{ // quotes stored here
   quote: "No matter what I choose to become, I believe that I can change the world. And as I'm striving to change the world I will be happy.",
   author: "Sam Berns (You made it Sam, you changed the world)"
 }, {

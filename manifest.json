@@ -1,14 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Focus.",
-  "version": "1.0",
+  "version": "1.1",
   "permissions": [
     "tabs",
-    "storage",
-    "notifications",
-    "unlimitedStorage",
-    "scripting",
-    "webRequest"
+    "storage"
   ],
   "description": "Boost productivity.",
   "background": {
@@ -18,19 +14,12 @@
     "default_popup": "html/main/popup.html",
     "default_icon": "img/icon128.png"
   },
-  "options_page": "html/config/tabs.html",
+  "options_page": "html/config/home.html",
   "options_ui": {
-    "page": "html/config/tabs.html",
+    "page": "html/config/home.html",
     "open_in_tab": true
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["scripts/main/content.js"],
-      "all_frames": false,
-      "run_at": "document_start"
-    }
-  ],
+
   "icons": {
     "16": "img/icon16.png",
     "32": "img/icon32.png",
@@ -38,7 +27,6 @@
     "64": "img/icon64.png",
     "128": "img/icon128.png"
   },
-  "host_permissions": ["<all_urls>"],
   "web_accessible_resources": [
     {
       "resources": ["styles/blockPage.css"],
