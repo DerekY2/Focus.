@@ -1,22 +1,23 @@
 /*Authors: Derek Yu, Hrishi Paripati
-  Home page - front-end; in-line js has been moved here to comply with Chrome's policies
+ *Home page - back-end; front-end in-line js has been moved here to comply with Chrome's policies
+ *
+ *  The code here mainly works alongside the front-end, and doesn’t provide anything much towards the back-end of the software.
+ *
+ *  introBtn.addEventListener(): 
+ *    This event listener is attached to the intro button. It listens for a click event and executes 
+ *    the callback function when the button is clicked. Inside the callback function, the code toggles the visibility of the tutorial 
+ *    section, making it either visible or hidden.
+ *
+ *  tabsBtn.addEventListener(): 
+ *    This event listener is attached to the tabs button. It listens for a click event and executes the callback function when the button 
+ *    is clicked. Inside the callback function, the code redirects the user to the "tabs.html" page.
+ *
+ *  bgImage.onload(): 
+ *    This line attaches an onload event handler to the bgImage object. It is triggered when the background image has 
+ *    finished loading. Inside the callback function, the code removes the preloadBg element from the DOM, effectively 
+ *    removing the preloading element from the page.
+ */
 
-  The code here mainly works alongside the front-end, and doesn’t provide anything much towards the back-end of the software:
-
-  introBtn.addEventListener(): 
-    This event listener is attached to the intro button. It listens for a click event and executes 
-    the callback function when the button is clicked. Inside the callback function, the code toggles the visibility of the tutorial 
-    section, making it either visible or hidden.
-
-  tabsBtn.addEventListener(): 
-    This event listener is attached to the tabs button. It listens for a click event and executes the callback function when the button 
-    is clicked. Inside the callback function, the code redirects the user to the "tabs.html" page.
-
-  bgImage.onload(): 
-    This line attaches an onload event handler to the bgImage object. It is triggered when the background image has 
-    finished loading. Inside the callback function, the code removes the preloadBg element from the DOM, effectively 
-    removing the preloading element from the page.
-*/
 // Preload the background image
 window.addEventListener('DOMContentLoaded', function() {
   var preloadBg = document.getElementById('preload-bg');

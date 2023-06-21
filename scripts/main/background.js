@@ -1,3 +1,32 @@
+/* Authors: Derek Yu, Hrishi Paripati
+ *  background page: This is where all background processes arel ocated. These run independently of the user's actions
+ *
+ *  closeTabs() function: 
+ *    -Retrieves the closeEntries and openEntries arrays from Chrome storage.
+ *    -Queries all tabs using chrome.tabs.query() function.
+ *    -Check if the focus.html tab is already open.
+ *    -Prepares an array of promises to close the matching tabs.
+ *    -Closes the matching tabs using chrome.tabs.remove() function and creates a new tab for focus.html.
+ *    -Open the URLs in the openEntries array.
+ *
+ *
+ *  toggleFocus() function: 
+ *    This function is called to toggle the state of the closeTabsEnabled variable. If closeTabsEnabled is true, it calls the closeTabs() function immediately to close existing tabs. If closeTabsEnabled is false, it closes all focus.html tabs if they are open.
+ *
+ *  handleUpdatedTab() function: 
+ *    -Retrieves the closeEntries array from Chrome storage.
+ *    -Checks if the updated tab URL matches any entry in the closeEntries array.
+ *    -Closes the matching tab using chrome.tabs.remove() function and creates a new tab for focus.html if necessary.
+ *  openOptionsPage() function: 
+ *    This function is called to open the extension's configuration page.
+ *
+ *  chrome.runtime.onMessage.addListener() event listener: 
+ *    Listens for messages from the popup or content script and performs the corresponding action. Currently, it supports two actions: "openOptionsPage" and "toggleFocus".
+ *
+ *  chrome.runtime.onInstalled.addListener() event listener: 
+ *    Registers the handleUpdatedTab() function as a listener for the tab update event when the extension is first installed.
+*/
+
 // Set a variable to track the state of closeTabs
 let closeTabsEnabled = false;
 let blockPageTabId = null; // Variable to store the focus.html tab ID

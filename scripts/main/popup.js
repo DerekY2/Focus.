@@ -1,3 +1,25 @@
+/* Authors: Derek Yu, Hrishi Paripati
+ * popup page - back-end; User toggles blockTabs(), accesses settings page. User's schedule is displayed here.
+ *
+ *toggleFocus(): 
+ *  This function is responsible for toggling the state of the closeTabsEnabled variable. It retrieves the new state from the 
+ *  closeTabSwitch checkbox and stores it in Chrome storage. Then, it sends a message to the background script to toggle the closeTabs 
+ *  function based on the new state.
+ *
+ *displaySchedule(tasks):  
+ *  This function is used to display the schedule of tasks in the popup. It takes an array of tasks as input and updates the HTML 
+ *  elements in the popup to display the tasks.
+ *
+ *loadTasks(): 
+ *  This function is used to load the user's tasks from Chrome storage. It retrieves the tasks using the chrome.storage.sync.get() 
+ *  function and calls the displaySchedule() function to update the schedule display in the popup.
+ *
+ *openOptionsPage(): 
+ *  This function is called when the configBtn button is clicked. It sends a message to the background script to open the 
+ *  options page of the extension.
+ *
+*/
+
 document.addEventListener("DOMContentLoaded", function() {
   var closeTabSwitch = document.getElementById('closeTabSwitch');
   var configBtn = document.getElementById("configBtn");

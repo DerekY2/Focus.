@@ -1,21 +1,30 @@
-/* Authors: Derek Yu, Hrishi Paripati
- * Schedule configuration - back-end, managing the user's schedule(task, time entries)
-    handleSubmit(): 
-    This function is called when the user submits the form to add a new task. It retrieves the task name and selected time from the form, creates a new table row with cells for the task name, time, and delete button, appends the row to the tasks body, saves the updated tasks to Chrome storage, and clears the form input fields.
-
-    handleSort(): 
-    This function is called when the user clicks the sort button. It retrieves the tasks rows, converts the NodeList to an array, sorts the array based on the time value, removes the existing tasks rows from the tasks body, and appends the sorted tasks rows back to the tasks body. It then saves the updated tasks order to Chrome storage.
-
-    handleDelete(): 
-    This function is called when the user clicks the delete button for a task. It removes the corresponding row from the tasks body and saves the updated tasks to Chrome storage.
-
-    saveTasks():
-    This function saves the tasks array to Chrome storage. It retrieves the tasks rows, iterates through them to extract the task and time values, creates an object representing a task entry, pushes the entry to the tasks array, and saves the tasks array to Chrome storage using the chrome.storage.sync.set() function.
-
-    loadTasks(): 
-    This function loads the tasks from Chrome storage. It retrieves the tasks array from Chrome storage using the chrome.storage.sync.get() function, creates table rows and cells for each task entry, appends them to the tasks body, and resolves a promise with the loaded tasks array.
-
-*/
+/**Authors: Derek Yu, Hrishi Paripati
+ * Schedule configuration page - back-end, manage  user's schedule(task, time entries)
+ * 
+ *   handleSubmit(): 
+ *     This function is called when the user submits the form to add a new task. It retrieves the task name and selected time from the form, 
+ *     creates a new table row with cells for the task name, time, and delete button, appends the row to the tasks body, saves the updated 
+ *     tasks to Chrome storage, and clears the form input fields.
+ *
+ *   handleSort(): 
+ *     This function is called when the user clicks the sort button. It retrieves the tasks rows, converts the NodeList to an array, sorts the 
+ *     array based on the time value, removes the existing tasks rows from the tasks body, and appends the sorted tasks rows back to the tasks body. 
+ *     It then saves the updated tasks order to Chrome storage.
+ *
+ *   handleDelete(): 
+ *     This function is called when the user clicks the delete button for a task. It removes the corresponding row from the tasks body and saves 
+ *     the updated tasks to Chrome storage.
+ *
+ *   saveTasks():
+ *     This function saves the tasks array to Chrome storage. It retrieves the tasks rows, iterates through them to extract the task and time
+ *      values, creates an object representing a task entry, pushes the entry to the tasks array, and saves the tasks array to Chrome storage using 
+ *     the chrome.storage.sync.set() function.
+ *
+ *   loadTasks(): 
+ *     This function loads the tasks from Chrome storage. It retrieves the tasks array from Chrome storage using the chrome.storage.sync.get() 
+ *     function, creates table rows and cells for each task entry, appends them to the tasks body, and resolves a promise with the loaded tasks array.
+ *
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
   // Get the select elements

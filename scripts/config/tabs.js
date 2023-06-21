@@ -1,30 +1,43 @@
 /* Authors: Derek Yu, Hrishi Paripati
  * Tab configuration page - back-end for managing user' URL selections.
-    saveTabClose(websiteUrl, websiteName): 
-    Responsible for saving a closed tab. It takes the websiteUrl and websiteName as parameters and creates a new entry in the closeEntries array. It saves the updated array to the Chrome storage and returns a promise.
-
-    saveTabOpen(websiteUrl, websiteName): 
-    This function is similar to saveTabClose but is used for saving an open tab. It creates a new entry in the openEntries array, saves the updated array to the Chrome storage, and returns a promise.
-
-    getTabs(): 
-    Retrieves the saved tabs from the Chrome storage. It fetches the closeEntries and openEntries arrays from the storage and updates the corresponding local arrays. It then calls the displayCloseTabs and displayOpenTabs functions to render the saved tabs in the HTML document.
-
-    displayCloseTabs(): 
-    Responsible for rendering the saved closed tabs in the HTML document. It clears the savedTabsContainer element and iterates over the closeEntries array. For each entry, it creates a new div element with the website name and a delete button, and appends it to the savedTabsContainer.
-
-    displayOpenTabs(): 
-    This function is similar to displayCloseTabs but is used to render the saved open tabs in the HTML document. It clears the openTabsContainer element and iterates over the openEntries array. For each entry, it creates a new div element with the website name and a delete button, and appends it to the openTabsContainer.
-
-    deleteCloseTab(savedTab): 
-    This function is called when a delete button for a closed tab is clicked. It takes the savedTab element as a parameter and identifies the corresponding tab to delete based on its website name. It removes the tab from the closeEntries array, saves the updated array to the Chrome storage, and calls the getTabs function to refresh the displayed tabs.
-
-    deleteOpenTab(openTab): 
-    This function is similar to deleteCloseTab but is used to delete an open tab. It takes the openTab element as a parameter and removes the corresponding tab from the openEntries array. It then saves the updated array to the Chrome storage and calls the getTabs function to refresh the displayed tabs.
-
-    isValidUrl(url): 
-    This function is used to validate a URL. It takes a url as a parameter and uses a regular expression to check if the URL matches the expected pattern. It returns true if the URL is valid and false otherwise.
-
-*/
+ *
+ *   saveTabClose(websiteUrl, websiteName): 
+ *    Responsible for saving a closed tab. It takes the websiteUrl and websiteName as parameters and creates a new entry in the 
+ *    closeEntries array. It saves the updated array to the Chrome storage and returns a promise.
+ *
+ *   saveTabOpen(websiteUrl, websiteName): 
+ *    This function is similar to saveTabClose but is used for saving an open tab. It creates a new entry in the 
+ *    openEntries array, saves the updated array to the Chrome storage, and returns a promise.
+ *
+ *   getTabs(): 
+ *    Retrieves the saved tabs from the Chrome storage. It fetches the closeEntries and openEntries arrays from 
+ *    the storage and updates the corresponding local arrays. It then calls the displayCloseTabs and displayOpenTabs functions to render 
+ *    the saved tabs in the HTML document.
+ *
+ *   displayCloseTabs(): 
+ *    Responsible for rendering the saved closed tabs in the HTML document. It clears the savedTabsContainer element and iterates over the 
+ *    closeEntries array. For each entry, it creates a new div element with the website name and a delete button, and appends it to the savedTabsContainer.
+ *
+ *   displayOpenTabs(): 
+ *    This function is similar to displayCloseTabs but is used to render the saved open tabs in the HTML document. It clears the 
+ *    openTabsContainer element and iterates over the openEntries array. For each entry, it creates a new div element with the website name and 
+ *    a delete button, and appends it to the openTabsContainer.
+ *
+ *   deleteCloseTab(savedTab): 
+ *    This function is called when a delete button for a closed tab is clicked. It takes the savedTab element as a parameter and identifies 
+ *    the corresponding tab to delete based on its website name. It removes the tab from the closeEntries array, saves the updated array to 
+ *    the Chrome storage, and calls the getTabs function to refresh the displayed tabs.
+ *
+ *   deleteOpenTab(openTab): 
+ *    This function is similar to deleteCloseTab but is used to delete an open tab. It takes the openTab element as a parameter and removes 
+ *    the corresponding tab from the openEntries array. It then saves the updated array to the Chrome storage and calls the getTabs function 
+ *    to refresh the displayed tabs.
+ *
+ *   isValidUrl(url): 
+ *    This function is used to validate a URL. It takes a url as a parameter and uses a regular expression to check if the URL matches 
+ *    the expected pattern. It returns true if the URL is valid and false otherwise.
+ *
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
   // Get references to various elements
