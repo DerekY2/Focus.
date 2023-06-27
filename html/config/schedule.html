@@ -63,7 +63,7 @@
 
     .submit-button {
       padding: 10px 30px;
-      background-color: lightblue; /* Set the background color to lightblue */
+      background-color: rgb(46, 166, 206); /* Set the background color to lightblue */
       color: #fff;
       border: none;
       border-radius: 3px;
@@ -153,6 +153,38 @@
     .delete-button:active {
       background-color: #2178a3; /* Change the background color on click */
     }
+
+    header nav ul li a{
+      color: #FFFFFF; /* Change this to the desired text color */
+    }
+
+    header nav ul li a:not(#schedule-link):hover{
+      color: #50c8ff; /* Change this to the desired text color */
+      
+    }
+
+    header nav ul li a#schedule-link{
+      background-color: #007ec7; /* Change this to the desired background color */
+      padding-top: 22.7px; /* Adjust the top padding */
+      padding-bottom: 22.7px; /* Adjust the bottom padding */
+      padding-left: 10px; /* Adjust the left padding */
+      padding-right: 10px; /* Adjust the right padding */
+    }
+
+    header nav ul li a#tabs-link{
+      padding-top: 22.7px; /* Adjust the top padding */
+      padding-bottom: 22.7px; /* Adjust the bottom padding */
+      padding-left: 23px; /* Adjust the left padding */
+      padding-right: 23px; /* Adjust the right padding */
+    }
+
+    header nav ul li a#home-link{
+      padding-top: 22.7px; /* Adjust the top padding */
+      padding-bottom: 22.7px; /* Adjust the bottom padding */
+      padding-left: 23px; /* Adjust the left padding */
+      padding-right: 23px; /* Adjust the right padding */
+    }
+
   </style>
 </head>
 <body>
@@ -160,9 +192,9 @@
     <h1 id="logo">Focus.</h1>
     <nav>
       <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="tabs.html">Tabs</a></li>
-        <li><a href="schedule.html">Schedule</a></li>
+        <li><a id="home-link" href="home.html"><span>Home</span></a></li>
+        <li><a id="tabs-link" href="tabs.html"><span>Tabs</span></a></li>
+        <li><a id="schedule-link" href="schedule.html"><span>Schedule</span></a></li>
        
       </ul>
     </nav>

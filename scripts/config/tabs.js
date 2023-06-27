@@ -38,7 +38,6 @@
  *    the expected pattern. It returns true if the URL is valid and false otherwise.
  *
  */
-
 document.addEventListener('DOMContentLoaded', () => {
   // Get references to various elements
   const addTabButton = document.getElementById('addTabButton');
@@ -120,57 +119,78 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Display tabs meant to be closed
   function displayCloseTabs() {
-      savedTabsContainer.innerHTML = '';
+    savedTabsContainer.innerHTML = '';
+  
+    // Display tabs meant to be closed
+    closeEntries.forEach((entry) => {
+      // Create a div element for each saved tab
+      const savedTab = document.createElement('div');
+      savedTab.classList.add('saved-website', 'blocked');
+  
+      // Create a span element for the website name
+      const nameSpan = document.createElement('span');
+      nameSpan.innerText = entry.websiteName;
+      nameSpan.style.marginRight = '20px'; // Add some spacing between the URL and name
+  
+      // Create a span element for the website URL
+      const urlSpan = document.createElement('span');
+      urlSpan.innerText = entry.websiteUrl;
+      urlSpan.classList.add('displayUrl');
 
-      // Display tabs meant to be closed
-      closeEntries.forEach((entry) => {
-          // Create a div element for each saved tab
-          const savedTab = document.createElement('div');
-          savedTab.classList.add('saved-website', 'blocked');
-          savedTab.innerText = entry.websiteName; // Set the text content to the website name
-
-          // Create a delete button for each saved tab
-          const deleteButton = document.createElement('button');
-          deleteButton.classList.add('delete-button');
-          deleteButton.innerHTML = 'x'; // Use "x" as the delete icon
-          deleteButton.style.backgroundColor = 'transparent';
-
-          // Append the delete button to the saved tab
-          savedTab.appendChild(deleteButton);
-
-          // Append the saved tab to the savedTabsContainer
-          savedTabsContainer.appendChild(savedTab);
-      });
-
+      // Create a delete button for each saved tab
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('delete-button');
+      deleteButton.innerHTML = 'x'; // Use "x" as the delete icon
+      deleteButton.style.backgroundColor = 'transparent';
+  
+      // Append the URL span, name span, and delete button to the saved tab
+      savedTab.appendChild(nameSpan);
+      savedTab.appendChild(urlSpan);
+      savedTab.appendChild(deleteButton);
+  
+      // Append the saved tab to the savedTabsContainer
+      savedTabsContainer.appendChild(savedTab);
+    });
   }
+  
 
   // Display tabs meant to be opened
   function displayOpenTabs() {
-      openTabsContainer.innerHTML = '';
-
-      // Display tabs meant to be opened
-      openEntries.forEach((entry) => {
-          // Create a div element for each open tab
-          const openTab = document.createElement('div');
-          openTab.classList.add('saved-website', 'open');
-          openTab.innerText = entry.websiteName; // Set the text content to the website name
-
-          // Create a delete button for each open tab
-          const deleteButton = document.createElement('button');
-          deleteButton.classList.add('delete-button');
-          deleteButton.innerHTML = 'x'; // Use "x" as the delete icon
-          deleteButton.style.backgroundColor = 'transparent';
-
-          // Append the delete button to the open tab
-          openTab.appendChild(deleteButton);
-
-          // Append the open tab to the openTabsContainer
-          openTabsContainer.appendChild(openTab);
-      });
-
+    openTabsContainer.innerHTML = '';
+  
+    // Display tabs meant to be opened
+    openEntries.forEach((entry) => {
+      // Create a div element for each open tab
+      const openTab = document.createElement('div');
+      openTab.classList.add('saved-website', 'open');
+  
+      // Create a span element for the website name
+      const nameSpan = document.createElement('span');
+      nameSpan.innerText = entry.websiteName;
+      nameSpan.style.marginRight = '20px'; // Add some spacing between the URL and name
+  
+      // Create a span element for the website URL
+      const urlSpan = document.createElement('span');
+      urlSpan.innerText = entry.websiteUrl;
+      urlSpan.classList.add('displayUrl');
+  
+      // Create a delete button for each open tab
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('delete-button');
+      deleteButton.innerHTML = 'x'; // Use "x" as the delete icon
+      deleteButton.style.backgroundColor = 'transparent';
+  
+      // Append the URL span, name span, and delete button to the open tab
+      openTab.appendChild(nameSpan);
+      openTab.appendChild(urlSpan);
+      openTab.appendChild(deleteButton);
+  
+      // Append the open tab to the openTabsContainer
+      openTabsContainer.appendChild(openTab);
+    });
   }
+  
 
   // Event listener for deleting close tabs
   savedTabsContainer.addEventListener('click', (event) => {
@@ -234,6 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return urlRegex.test(url);
   }
 
+  function isValidName(name) {
+      return name.trim() == "";
+  }
+
   // Event listener for the close button
   closeButton.addEventListener('click', () => {
       const websiteUrl = websiteUrlInput.value;
@@ -246,10 +270,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isValidUrl(websiteUrl)) {
           urlErrorMessage.textContent = 'Please enter a valid URL.'; // Display error message
           return;
+      } else if (!isValidName(websiteName)) {
+          nameErrorMessage.textContent = 'Please enter a website name.'; // Display error message
+          return;
       }
 
       // Clear the error message
       urlErrorMessage.textContent = '';
+      nameErrorMessage.textContent = '';
 
       // Create a div element for the saved tab
       const savedTab = document.createElement('div');

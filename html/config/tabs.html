@@ -49,6 +49,17 @@
       border-radius: 3px;
     }
 
+    .saved-website,
+    .addButton,
+    .closeTabsButton,
+    .submit-button,
+    .saveBlockBtn,
+    .saveOpenBtn {
+      backface-visibility: hidden;
+      will-change: transform;
+    }
+
+
     .addButton, .closeTabsButton, .submit-button {
       font-family: cursive;
       padding: 10px 20px;
@@ -134,6 +145,11 @@
       filter: brightness(0.8); /* Darken the color on click */
     }
 
+    #urlErrorMessage, #nameErrorMessage{
+      color:red;
+    }
+
+
     .saved-website.blocked {
       background-color: rgb(255, 144, 144);
     }
@@ -145,6 +161,41 @@
     .delete-button {
       background-color: transparent;
     }
+
+    header nav ul li a{
+      color: #FFFFFF; /* Change this to the desired text color */
+    }
+
+    header nav ul li a:not(#tabs-link):hover{
+      color: #50c8ff; /* Change this to the desired text color */
+      
+    }
+
+    header nav ul li a#tabs-link{
+      background-color: #007ec7; /* Change this to the desired background color */
+      padding-top: 22.7px; /* Adjust the top padding */
+      padding-bottom: 22.7px; /* Adjust the bottom padding */
+      padding-left: 23px; /* Adjust the left padding */
+      padding-right: 23px; /* Adjust the right padding */
+    }
+
+    header nav ul li a#home-link{
+      padding-top: 22.7px; /* Adjust the top padding */
+      padding-bottom: 22.7px; /* Adjust the bottom padding */
+      padding-left: 23px; /* Adjust the left padding */
+      padding-right: 23px; /* Adjust the right padding */
+    }
+
+    header nav ul li a#schedule-link{
+      padding-top: 22.7px; /* Adjust the top padding */
+      padding-bottom: 22.7px; /* Adjust the bottom padding */
+      padding-left: 10px; /* Adjust the left padding */
+      padding-right: 10px; /* Adjust the right padding */
+    }
+
+    .displayUrl{
+      color:rgb(79, 79, 79);
+    }
     
   </style>
 </head>
@@ -153,9 +204,9 @@
     <h1 id="logo">Focus.</h1>
     <nav>
       <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="tabs.html">Tabs</a></li>
-        <li><a href="schedule.html">Schedule</a></li>
+        <li><a id="home-link" href="home.html"><span>Home</span></a></li>
+        <li><a id="tabs-link" href="tabs.html"><span>Tabs</span></a></li>
+        <li><a id="schedule-link" href="schedule.html"><span>Schedule</span></a></li>
       </ul>
     </nav>
   </header>
@@ -168,12 +219,13 @@
       <form id="tabForm" style="display: none;">
         <div class="input-container">
           <label for="websiteUrl">Website URL:</label>
-          <input type="text" id="websiteUrl" required>
+          <input type="text" id="websiteUrl" required placeholder="https://example.com/">
           <p class="error-message" id="urlErrorMessage"></p> <!-- Error message element -->
         </div>
         <div class="input-container">
           <label for="websiteName">Website Name:</label>
-          <input type="text" id="websiteName" required>
+          <input type="text" id="websiteName" required placeholder="Enter a name">
+          <p class="error-message" id="nameErrorMessage"></p> <!-- Error message element -->
         </div>
         <button type="button" id="closeButton" class="saveBlockBtn">Save - Block</button>
         <button type="button" id="openButton" class="saveOpenBtn">Save - Open</button>

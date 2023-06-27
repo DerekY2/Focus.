@@ -1,5 +1,5 @@
 /* Authors: Derek Yu, Hrishi Paripati
- *  background page: This is where all background processes arel ocated. These run independently of the user's actions
+ *  background page: This is where all background processes are located. These run independently of the user's actions
  *
  *  closeTabs() function: 
  *    -Retrieves the closeEntries and openEntries arrays from Chrome storage.
@@ -67,28 +67,22 @@ function closeTabs() {
                 }
             }
 
-            /*
-            // If focus.html tab is found, activate it
-            if (blockPageTabId) {
-              chrome.tabs.update(blockPageTabId, { active: true }, function (updatedTab) {
-                //console.log("Block page tab already exists:", blockPageTabId);
-              });
-            } else {
-              
-            }
-            */
-
             // Prepare an array of promises to close the matching tabs
             var closePromises = [];
             tabs.forEach(function(tab) {
                 var tabUrl = new URL(tab.url);
                 //console.log("Querying...\n tabUrl: " + tabUrl + "\ntabUrl.hostname: " + tabUrl.hostname + ', ' + tab.id);
-                // Check if the tab URL hostname is included in the closeEntries array
-                if (closeEntries.some(entry => tabUrl.hostname.includes(entry.websiteUrl))) {
+                // Check if the tab URL hostname is included in the closeEntries array and not in the openEntries array
+                console.log(tabUrl.href);
+                    if(openEntries.some(entry => tabUrl.href==entry.websiteUrl)){
+                        console.log("Permission granted: " + tabUrl.href);
+                    }
+                else if (closeEntries.some(entry => tabUrl.hostname.includes(entry.websiteUrl))) {
+                    
                     // Create a promise to close the tab
                     var closePromise = new Promise(function(resolve, reject) {
                         chrome.tabs.remove(tab.id, function() {
-                            //console.log("Tab closed:", tab.id);
+                            console.log("Tab closed: ", tab.id, ", ", tabUrl.hostname);
                             // Create a new tab for focus.html
                             chrome.tabs.create({
                                 url: chrome.runtime.getURL("../../html/config/focus.html")
@@ -131,6 +125,7 @@ function closeTabs() {
     chrome.tabs.onUpdated.addListener(handleUpdatedTab);
 }
 
+
 function toggleFocus() {
     // Toggle the state of closeTabsEnabled
     closeTabsEnabled = !closeTabsEnabled;
@@ -164,12 +159,18 @@ function handleUpdatedTab(tabId, changeInfo, tab) {
         if (closeTabsEnabled) {
             // Check if the updated tab matches the URL entries
             var tabUrl = new URL(changeInfo.url);
-            chrome.storage.sync.get("closeEntries", function(result) {
+            chrome.storage.sync.get(["closeEntries", "openEntries"], function(result) {
                 var closeEntries = result.closeEntries || [];
-                if (closeEntries.some(entry => tabUrl.hostname.includes(entry.websiteUrl))) {
+                var openEntries = result.openEntries || [];
+                console.log(tabUrl.href);
+                if(openEntries.some(entry => tabUrl.href.includes(entry.websiteUrl))){
+                    console.log("Permission granted: " + tabUrl.href);
+                }
+                else if ((closeEntries.some(entry => tabUrl.hostname.includes(entry.websiteUrl)))) {
+                    var matchingEntry = closeEntries.find(entry => tabUrl.hostname.includes(entry.websiteUrl));
                     // Close the matching tab
                     chrome.tabs.remove(tabId, function() {
-                        //console.log("Tab closed:", tabId);
+                        console.log("Tab closed:", tabId, ", ", tabUrl.hostname, " to ", matchingEntry.websiteUrl);
                     });
 
                     // Check if focus.html tab is already open
@@ -192,7 +193,8 @@ function handleUpdatedTab(tabId, changeInfo, tab) {
                             });
                         }
                     });
-                } else {
+                }
+              else {
                     //console.log("no matches found.");
                 }
             });
