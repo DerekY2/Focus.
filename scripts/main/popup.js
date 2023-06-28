@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   
     // Check the state of closeTabsEnabled and update the switch accordingly
-    chrome.storage.sync.get("closeTabsEnabled", function(result) {
+    chrome.storage.local.get("closeTabsEnabled", function(result) {
         var closeTabsEnabled = result.closeTabsEnabled || false;
         closeTabSwitch.checked = closeTabsEnabled;
     });

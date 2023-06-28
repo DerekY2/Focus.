@@ -45,6 +45,15 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     }
 });
 
+// Toggle closeTabsEnabled to false when the user opens their browser
+chrome.runtime.onStartup.addListener(function () {
+    closeTabsEnabled = false;
+    chrome.storage.local.set({closeTabsEnabled: closeTabsEnabled}, function(){
+        //console.log("Startup: closeTabsEnabled: ", closeTabsEnabled);
+    });
+  });
+  
+
 // Register the tab update event listener when the extension is first installed
 chrome.runtime.onInstalled.addListener(function() {
     chrome.tabs.onUpdated.addListener(handleUpdatedTab);
@@ -133,7 +142,7 @@ function toggleFocus() {
     if (closeTabsEnabled) {
         // Call closeTabs immediately to close existing tabs
         closeTabs();
-
+        
         //console.log("closeTabs enabled");
     } else {
         // Close all focus.html tabs if they are open
@@ -149,6 +158,10 @@ function toggleFocus() {
 
         //console.log("closeTabs disabled");
     }
+
+    chrome.storage.local.set({closeTabsEnabled: closeTabsEnabled}, function(){
+        //console.log("closeTabsEnabled: ", closeTabsEnabled);
+    });
 }
 
 

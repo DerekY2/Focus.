@@ -196,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
   savedTabsContainer.addEventListener('click', (event) => {
       if (event.target.classList.contains('delete-button') || event.target.innerHTML === 'x') {
           const savedTab = event.target.closest('.saved-website');
+          console.log(savedTab);
           deleteCloseTab(savedTab);
       }
   });
@@ -208,45 +209,66 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
 
-  // Delete a close tab
-  function deleteCloseTab(savedTab) {
-      const deleteName = savedTab.childNodes[0].nodeValue.trim();
-      const deleteIndex = closeEntries.findIndex((entry) => {
-          return entry.websiteName.toString() === deleteName.toString();
-      });
-
-      if (deleteIndex !== -1) {
-          closeEntries.splice(deleteIndex, 1);
-
-          // Store the updated closeEntries array in chrome storage
-          chrome.storage.sync.set({
-              closeEntries
-          }, function() {
-              // Update the displayed tabs
-              getTabs();
-          });
-      }
+ // Delete a close tab
+function deleteCloseTab(savedTab) {
+  if (!savedTab) {
+      return; // Exit the function if savedTab is null
   }
 
-  // Delete an open tab
-  function deleteOpenTab(openTab) {
-      const deleteName = openTab.childNodes[0].nodeValue.trim();
-      const deleteIndex = openEntries.findIndex((entry) => {
-          return entry.websiteName.toString() === deleteName.toString();
-      });
-
-      if (deleteIndex !== -1) {
-          openEntries.splice(deleteIndex, 1);
-
-          // Store the updated openEntries array in chrome storage
-          chrome.storage.sync.set({
-              openEntries
-          }, function() {
-              // Update the displayed tabs
-              getTabs();
-          });
-      }
+  const nameSpan = savedTab.querySelector('span:first-child');
+  if (!nameSpan) {
+      return; // Exit the function if nameSpan is null
   }
+
+  const deleteName = nameSpan.textContent.trim();
+  const deleteIndex = closeEntries.findIndex((entry) => {
+      return entry.websiteName.toString() === deleteName.toString();
+  });
+
+  if (deleteIndex !== -1) {
+      closeEntries.splice(deleteIndex, 1);
+
+      // Store the updated closeEntries array in chrome storage
+      chrome.storage.sync.set({
+          closeEntries
+      }, function() {
+          // Update the displayed tabs
+          getTabs();
+      });
+  }
+}
+
+
+// Delete an open tab
+function deleteOpenTab(openTab) {
+  if (!openTab) {
+    return; // Exit the function if openTab is null
+}
+
+const nameSpan = openTab.querySelector('span:first-child');
+if (!nameSpan) {
+    return; // Exit the function if nameSpan is null
+}
+
+const deleteName = nameSpan.textContent.trim();
+const deleteIndex = openEntries.findIndex((entry) => {
+    return entry.websiteName.toString() === deleteName.toString();
+});
+
+if (deleteIndex !== -1) {
+    openEntries.splice(deleteIndex, 1);
+
+    // Store the updated closeEntries array in chrome storage
+    chrome.storage.sync.set({
+        openEntries
+    }, function() {
+        // Update the displayed tabs
+        getTabs();
+    });
+}
+}
+
+
 
   // Check if a URL is valid
   function isValidUrl(url) {
@@ -255,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function isValidName(name) {
-      return name.trim() == "";
+      return name.trim() !== "";
   }
 
   // Event listener for the close button
