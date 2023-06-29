@@ -18,12 +18,9 @@
  *
 */
 
-var quotes = [{ // quotes stored here
-  quote: "No matter what I choose to become, I believe that I can change the world. And as I'm striving to change the world I will be happy.",
-  author: "Sam Berns (You made it Sam, you changed the world)"
-}, {
-  quote: "Don't watch the clock; do what it does. Keep going.",
-  author: "Sam Levenson"
+var quotes = [{ // Quotes stored here
+  quote: "Don't watch the clock; do what it does. Keep going.", // quote 
+  author: "Sam Levenson" // quote author
 }, {
   quote: "It always seems impossible until it's done.",
   author: "Nelson Mandela"

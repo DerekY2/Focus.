@@ -179,11 +179,11 @@ function handleUpdatedTab(tabId, changeInfo, tab) {
                 if(openEntries.some(entry => tabUrl.href.includes(entry.websiteUrl))){
                     console.log("Permission granted: " + tabUrl.href);
                 }
-                else if ((closeEntries.some(entry => tabUrl.hostname.includes(entry.websiteUrl)))) {
-                    var matchingEntry = closeEntries.find(entry => tabUrl.hostname.includes(entry.websiteUrl));
+                else if ((closeEntries.some(entry => tabUrl.href.includes(entry.websiteUrl)))) {
+                    var matchingEntry = closeEntries.find(entry => tabUrl.href.includes(entry.websiteUrl));
                     // Close the matching tab
                     chrome.tabs.remove(tabId, function() {
-                        console.log("Tab closed:", tabId, ", ", tabUrl.hostname, " to ", matchingEntry.websiteUrl);
+                        console.log("Tab closed:", tabId, ", ", tabUrl.href, " to ", matchingEntry.websiteUrl);
                     });
 
                     // Check if focus.html tab is already open
